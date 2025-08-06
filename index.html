@@ -1,47 +1,855 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NamazTrack – Track Your Spiritual Journey</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NamazTrack — Complete Your Spiritual Obligations</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Poppins', 'ui-sans-serif', 'system-ui'],
+            body: ['Inter', 'ui-sans-serif', 'system-ui'],
+          },
+          colors: {
+            brand: {
+              50: '#eefdfb',
+              100: '#cdf9f3',
+              200: '#9af2e7',
+              300: '#5de6d5',
+              400: '#2ad1bf',
+              500: '#14b7a7',
+              600: '#0f9388',
+              700: '#10766e',
+              800: '#115e59',
+              900: '#0f4e4a',
+            },
+            night: {
+              900: '#0b1020',
+              800: '#0f1830',
+              700: '#162044',
+              600: '#1e2a59',
+            }
+          },
+          boxShadow: {
+            glow: '0 10px 40px rgba(20, 183, 167, 0.35)',
+          },
+          backgroundImage: {
+            'hero-pattern': "radial-gradient(circle at 20% 10%, rgba(20,183,167,0.25), transparent 35%), radial-gradient(circle at 80% 10%, rgba(99,102,241,0.25), transparent 35%), radial-gradient(circle at 50% 80%, rgba(236,72,153,0.25), transparent 35%)",
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Subtle animated stars for hero background */
+    .stars {
+      position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+    }
+    .stars i {
+      position: absolute; background: radial-gradient(circle, rgba(255,255,255,.9), rgba(255,255,255,0));
+      width: 3px; height: 3px; border-radius: 999px; opacity: .8;
+      animation: twinkle 4s ease-in-out infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { transform: scale(1); opacity: .6; }
+      50% { transform: scale(1.4); opacity: 1; }
+    }
+  </style>
 </head>
-<body>
-  <header class="navbar">
-    <div class="container">
-      <div class="logo">namaztrack</div>
-      <nav class="nav-links">
-        <a href="#">User Dashboard</a>
-        <a href="#">Missed Prayer Calculator</a>
-        <a href="#">Missed Fast Calculator</a>
-        <a href="#">Data Input</a>
+
+<body class="bg-night-900 text-white font-body antialiased">
+  <!-- Header -->
+  <header class="relative z-20">
+    <div class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-brand-500/20 border border-brand-400/30 grid place-items-center shadow-glow">
+          <!-- Crescent + star SVG logo -->
+          <svg viewBox="0 0 24 24" class="w-6 h-6 text-brand-300">
+            <path fill="currentColor" d="M14.5 2a8.5 8.5 0 1 0 7.74 12.09a.75.75 0 0 0-.98-.99a7 7 0 1 1-7.38-11.1a.75.75 0 0 0 .62-.73Z"/>
+            <path fill="currentColor" d="m18.2 5.3l.6 1.8h1.9l-1.5 1l.6 1.8l-1.5-1l-1.5 1l.6-1.8l-1.5-1h1.9l.6-1.8Z"/>
+          </svg>
+        </div>
+        <span class="font-display text-xl tracking-wide">NamazTrack</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-8 text-white/80">
+        <a href="#features" class="hover:text-white transition">Features</a>
+        <a href="#how" class="hover:text-white transition">How it works</a>
+        <a href="#faq" class="hover:text-white transition">FAQ</a>
+        <a href="#cta" class="hover:text-white transition">Get started</a>
       </nav>
-      <a class="cta-button" href="#">Start Tracking Now</a>
+      <button id="openCalcTop" class="ml-6 bg-brand-500 hover:bg-brand-400 text-night-900 font-semibold px-4 py-2 rounded-lg shadow-glow transition">
+        Start Free Calculation
+      </button>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="overlay">
-      <div class="hero-content">
-        <h1>Track Your <span class="highlight">Spiritual Journey</span> with NamazTrack</h1>
-        <p>Calculate missed prayers and fasts with precision. Get personalized tracking calendars to complete your spiritual obligations and stay connected with Allah.</p>
-        <div class="hero-buttons">
-          <a href="#" class="primary-btn">Start Tracking Now</a>
-          <a href="#" class="secondary-btn">Learn More</a>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-hero-pattern"></div>
+    <div class="absolute inset-0 stars" aria-hidden="true"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="font-display text-4xl md:text-6xl leading-tight font-extrabold">
+            Complete Your Spiritual Obligations
+          </h1>
+          <p class="mt-5 text-white/80 text-lg leading-relaxed">
+            Our comprehensive platform helps you calculate, track, and complete missed prayers and fasts with personalized guidance tailored to your circumstances.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <button id="openCalcHero" class="bg-brand-500 hover:bg-brand-400 text-night-900 font-semibold px-6 py-3 rounded-xl shadow-glow transition">
+              Start Free Calculation
+            </button>
+            <a href="#dashboard" class="px-6 py-3 rounded-xl border border-white/20 hover:border-white/40 hover:bg-white/5 transition">
+              View Dashboard
+            </a>
+          </div>
+          <p class="mt-4 text-sm text-white/60">
+            Note: This demo uses on-device calculations. Your inputs stay in your browser.
+          </p>
         </div>
-        <div class="hero-features">
-          <div class="feature-box"><img src="assets/prayer.svg"/><p>Prayer Calculator</p></div>
-          <div class="feature-box"><img src="assets/fast.svg"/><p>Fast Tracker</p></div>
-          <div class="feature-box"><img src="assets/progress.svg"/><p>Progress Tracking</p></div>
+
+        <!-- Visual "background image" feel using SVG illustration -->
+        <div class="relative">
+          <div class="relative rounded-3xl p-1 bg-gradient-to-br from-brand-400/40 via-indigo-500/30 to-pink-500/30">
+            <div class="rounded-3xl bg-night-800/40 backdrop-blur-xl border border-white/10 overflow-hidden">
+              <div class="p-8">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex h-10 w-10 rounded-full bg-brand-500/20 border border-brand-400/30 items-center justify-center">
+                      <span class="text-2xl">🕌</span>
+                    </span>
+                    <div>
+                      <p class="font-semibold">NamazTrack Snapshot</p>
+                      <p class="text-white/60 text-sm">24/7 Available Access • 100% Accurate</p>
+                    </div>
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-xs bg-emerald-400/15 text-emerald-200 border border-emerald-400/30">Live</span>
+                </div>
+
+                <div class="mt-6 grid grid-cols-3 gap-4">
+                  <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+                    <p class="text-xs text-white/60">Missed Prayers</p>
+                    <p class="text-2xl font-bold mt-1">1,248</p>
+                    <div class="mt-3 h-2 rounded-full bg-white/10">
+                      <div class="h-2 rounded-full bg-brand-400/90" style="width: 52%"></div>
+                    </div>
+                  </div>
+                  <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+                    <p class="text-xs text-white/60">Missed Fasts</p>
+                    <p class="text-2xl font-bold mt-1">84</p>
+                    <div class="mt-3 h-2 rounded-full bg-white/10">
+                      <div class="h-2 rounded-full bg-indigo-400/90" style="width: 70%"></div>
+                    </div>
+                  </div>
+                  <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+                    <p class="text-xs text-white/60">Progress</p>
+                    <p class="text-2xl font-bold mt-1">38%</p>
+                    <div class="mt-3 h-2 rounded-full bg-white/10">
+                      <div class="h-2 rounded-full bg-pink-400/90" style="width: 38%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-6 rounded-2xl p-4 bg-gradient-to-br from-white/5 to-white/0 border border-white/10">
+                  <p class="text-white/80 text-sm">
+                    “Arabic muslim woman praying in mosque.”
+                    <span class="ml-2 text-emerald-200 text-xs px-2 py-1 rounded-full bg-emerald-400/10 border border-emerald-400/30">24/7 Available Access</span>
+                  </p>
+                  <p class="text-white/60 text-sm mt-2">
+                    “High angle view of unrecognizable Muslim family praying salah.”
+                    <span class="ml-2 text-indigo-200 text-xs px-2 py-1 rounded-full bg-indigo-400/10 border border-indigo-400/30">100% Accurate</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Soft glow -->
+          <div class="absolute -inset-6 rounded-[2rem] bg-brand-500/10 blur-3xl -z-10"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <footer class="footer">
-    <p>&copy; 2025 NamazTrack. All rights reserved.</p>
+  <!-- Features -->
+  <section id="features" class="relative py-20">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-night-800/30 to-night-900/0 pointer-events-none"></div>
+    <div class="relative max-w-7xl mx-auto px-6">
+      <div class="text-center">
+        <h2 class="font-display text-3xl md:text-4xl font-bold">Feature Highlights</h2>
+        <p class="mt-3 text-white/70">Prayer Calculator • Fast Tracker • Progress Tracking</p>
+      </div>
+
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <!-- Prayer Calculator -->
+        <div class="rounded-3xl p-6 bg-white/5 border border-white/10 backdrop-blur-xl">
+          <div class="w-12 h-12 rounded-xl bg-brand-500/20 border border-brand-400/30 grid place-items-center">
+            <span class="text-2xl">🧮</span>
+          </div>
+          <h3 class="mt-4 font-semibold text-xl">Prayer Calculation</h3>
+          <p class="mt-2 text-white/70">Get precise estimates of missed prayers from the age of responsibility, accounting for valid exemptions and circumstances.</p>
+          <ul class="mt-4 space-y-2 text-white/80">
+            <li>• Five daily prayers calculation</li>
+            <li>• Exemption period consideration</li>
+            <li>• Detailed breakdown by prayer type</li>
+          </ul>
+        </div>
+
+        <!-- Fast Tracker -->
+        <div class="rounded-3xl p-6 bg-white/5 border border-white/10 backdrop-blur-xl">
+          <div class="w-12 h-12 rounded-xl bg-indigo-500/20 border border-indigo-400/30 grid place-items-center">
+            <span class="text-2xl">🌙</span>
+          </div>
+          <h3 class="mt-4 font-semibold text-xl">Fast Tracking</h3>
+          <p class="mt-2 text-white/70">Calculate missed Ramadan fasts and create a personalized schedule to make up for them throughout the year.</p>
+          <ul class="mt-4 space-y-2 text-white/80">
+            <li>• Ramadan fast calculations</li>
+            <li>• Flexible makeup schedules</li>
+            <li>• Progress monitoring</li>
+          </ul>
+        </div>
+
+        <!-- Progress Tracking -->
+        <div class="rounded-3xl p-6 bg-white/5 border border-white/10 backdrop-blur-xl">
+          <div class="w-12 h-12 rounded-xl bg-pink-500/20 border border-pink-400/30 grid place-items-center">
+            <span class="text-2xl">📈</span>
+          </div>
+          <h3 class="mt-4 font-semibold text-xl">Smart Calendar</h3>
+          <p class="mt-2 text-white/70">Interactive calendars that help you organize and track your spiritual obligations with visual progress indicators.</p>
+          <ul class="mt-4 space-y-2 text-white/80">
+            <li>• Visual progress tracking</li>
+            <li>• Customizable schedules</li>
+            <li>• Completion celebrations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mid-section visual cards -->
+  <section class="relative py-16">
+    <div class="relative max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-6">
+        <!-- Card 1 -->
+        <div class="group relative rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-night-800/70 to-night-700/50 backdrop-blur">
+          <div class="absolute inset-0 opacity-60" style="background: radial-gradient(60% 60% at 20% 20%, rgba(20,183,167,0.25), transparent 60%), radial-gradient(50% 50% at 80% 40%, rgba(99,102,241,0.25), transparent 60%)"></div>
+          <div class="relative p-8">
+            <div class="flex items-center justify-between">
+              <h3 class="font-semibold text-xl">Arabic muslim woman praying in mosque.</h3>
+              <span class="text-emerald-200 text-xs px-3 py-1 rounded-full bg-emerald-400/10 border border-emerald-400/30">24/7 Available Access</span>
+            </div>
+            <div class="mt-6 aspect-[16/9] rounded-2xl border border-white/10 bg-white/5 grid place-items-center">
+              <!-- Decorative SVG "image" -->
+              <svg viewBox="0 0 200 120" class="w-4/5">
+                <defs>
+                  <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#14b7a7" stop-opacity=".8"/>
+                    <stop offset="100%" stop-color="#6366f1" stop-opacity=".7"/>
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="200" height="120" rx="16" fill="url(#g1)" opacity=".25"/>
+                <path d="M30,90 Q60,40 100,80 T170,70" stroke="#14b7a7" stroke-width="3" fill="none" opacity=".8"/>
+                <circle cx="70" cy="60" r="14" fill="#14b7a7" opacity=".9"/>
+                <path d="M68 68 Q70 74 80 76" stroke="#0f4e4a" stroke-width="2" fill="none" opacity=".7"/>
+                <rect x="120" y="40" width="50" height="28" rx="6" fill="#ec4899" opacity=".7"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="group relative rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-night-800/70 to-night-700/50 backdrop-blur">
+          <div class="absolute inset-0 opacity-60" style="background: radial-gradient(60% 60% at 75% 30%, rgba(236,72,153,0.25), transparent 60%), radial-gradient(50% 50% at 15% 70%, rgba(20,183,167,0.25), transparent 60%)"></div>
+          <div class="relative p-8">
+            <div class="flex items-center justify-between">
+              <h3 class="font-semibold text-xl">High angle view of unrecognizable Muslim family with kid...</h3>
+              <span class="text-indigo-200 text-xs px-3 py-1 rounded-full bg-indigo-400/10 border border-indigo-400/30">100% Accurate</span>
+            </div>
+            <div class="mt-6 aspect-[16/9] rounded-2xl border border-white/10 bg-white/5 grid place-items-center">
+              <!-- Decorative SVG "image" -->
+              <svg viewBox="0 0 200 120" class="w-4/5">
+                <defs>
+                  <linearGradient id="g2" x1="1" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#ec4899" stop-opacity=".8"/>
+                    <stop offset="100%" stop-color="#14b7a7" stop-opacity=".7"/>
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="200" height="120" rx="16" fill="url(#g2)" opacity=".25"/>
+                <circle cx="60" cy="60" r="12" fill="#ec4899" opacity=".9"/>
+                <circle cx="100" cy="60" r="12" fill="#14b7a7" opacity=".9"/>
+                <circle cx="140" cy="60" r="12" fill="#6366f1" opacity=".9"/>
+                <path d="M40 85 H160" stroke="#ffffff" stroke-opacity=".5" stroke-width="2"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="relative py-20">
+    <div class="relative max-w-7xl mx-auto px-6">
+      <div class="text-center">
+        <h2 class="font-display text-3xl md:text-4xl font-bold">How NamazTrack Works</h2>
+        <p class="mt-3 text-white/70">Start your spiritual journey in just three simple steps. Our platform makes it easy to calculate and track your missed prayers and fasts.</p>
+      </div>
+
+      <div class="mt-12 grid md:grid-cols-3 gap-6">
+        <!-- Step 1 -->
+        <div class="rounded-3xl p-6 bg-white/5 border border-white/10">
+          <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-brand-500/20 border border-brand-400/30 grid place-items-center font-bold">1</span>
+            <div>
+              <p class="text-sm text-white/60">STEP 1</p>
+              <h3 class="font-semibold text-xl">Input Your Data</h3>
+            </div>
+          </div>
+          <p class="mt-3 text-white/80">Enter your date of birth, gender, and for females, menstruation cycle information. All data is kept private and secure.</p>
+          <ul class="mt-4 space-y-2 text-white/80">
+            <li>• Date of Birth</li>
+            <li>• Gender Selection</li>
+            <li>• Cycle Information</li>
+          </ul>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="rounded-3xl p-6 bg-white/5 border border-white/10">
+          <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-indigo-500/20 border border-indigo-400/30 grid place-items-center font-bold">2</span>
+            <div>
+              <p class="text-sm text-white/60">STEP 2</p>
+              <h3 class="font-semibold text-xl">Get Calculations</h3>
+            </div>
+          </div>
+          <p class="mt-3 text-white/80">Our system instantly calculates your missed prayers and fasts based on Islamic jurisprudence and your personal circumstances.</p>
+          <ul class="mt-4 space-y-2 text-white/80">
+            <li>• Prayer Count</li>
+            <li>• Fast Count</li>
+            <li>• Breakdown Details</li>
+          </ul>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="rounded-3xl p-6 bg-white/5 border border-white/10">
+          <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-pink-500/20 border border-pink-400/30 grid place-items-center font-bold">3</span>
+            <div>
+              <p class="text-sm text-white/60">STEP 3</p>
+              <h3 class="font-semibold text-xl">Track Progress</h3>
+            </div>
+          </div>
+          <p class="mt-3 text-white/80">Use our interactive calendars to schedule and track your makeup prayers and fasts. Mark completed obligations and celebrate your progress.</p>
+          <ul class="mt-4 space-y-2 text-white/80">
+            <li>• Visual Calendar</li>
+            <li>• Progress Tracking</li>
+            <li>• Completion Rewards</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo Dashboard + Calendar -->
+  <section id="dashboard" class="relative py-16">
+    <div class="relative max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h3 class="font-display text-2xl md:text-3xl font-bold">Your Smart Calendar</h3>
+          <p class="text-white/70 mt-1">Tap a day to mark a completed prayer set or fast. This is a simple demo.</p>
+        </div>
+        <div class="flex gap-3">
+          <button id="prevMonth" class="px-4 py-2 rounded-lg border border-white/15 hover:bg-white/5">Prev</button>
+          <button id="nextMonth" class="px-4 py-2 rounded-lg border border-white/15 hover:bg-white/5">Next</button>
+        </div>
+      </div>
+
+      <div class="mt-6 grid lg:grid-cols-3 gap-6">
+        <!-- Calendar -->
+        <div class="lg:col-span-2 rounded-3xl p-6 bg-white/5 border border-white/10">
+          <div class="flex items-center justify-between">
+            <div id="monthLabel" class="font-semibold text-xl">Month YYYY</div>
+            <div class="text-white/60 text-sm">Click to toggle ✔</div>
+          </div>
+          <div class="mt-4 grid grid-cols-7 gap-2 text-center text-white/60 text-sm">
+            <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+          </div>
+          <div id="calendarGrid" class="mt-3 grid grid-cols-7 gap-2"></div>
+        </div>
+
+        <!-- Mini stats -->
+        <div class="rounded-3xl p-6 bg-white/5 border border-white/10">
+          <h4 class="font-semibold text-lg">This Month</h4>
+          <div class="mt-4 space-y-4">
+            <div>
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-white/70">Prayer Sets Completed</span>
+                <span id="statPrayers" class="font-semibold">0</span>
+              </div>
+              <div class="mt-2 h-2 rounded-full bg-white/10"><div id="barPrayers" class="h-2 rounded-full bg-brand-400" style="width: 0%"></div></div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-white/70">Fasts Completed</span>
+                <span id="statFasts" class="font-semibold">0</span>
+              </div>
+              <div class="mt-2 h-2 rounded-full bg-white/10"><div id="barFasts" class="h-2 rounded-full bg-indigo-400" style="width: 0%"></div></div>
+            </div>
+            <button id="resetCalendar" class="mt-4 w-full px-4 py-2 rounded-lg border border-white/15 hover:bg-white/5">Reset Marks</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section id="cta" class="relative py-20">
+    <div class="relative max-w-7xl mx-auto px-6">
+      <div class="rounded-3xl p-8 md:p-12 bg-gradient-to-br from-brand-500/15 via-indigo-500/10 to-pink-500/10 border border-white/10 backdrop-blur">
+        <div class="grid md:grid-cols-2 gap-6 items-center">
+          <div>
+            <h3 class="font-display text-3xl font-bold">Ready to Begin Your Journey?</h3>
+            <p class="text-white/80 mt-2">Join thousands of Muslims who have successfully completed their missed obligations using NamazTrack.</p>
+          </div>
+          <div class="flex flex-wrap gap-3 md:justify-end">
+            <button id="openCalcCTA" class="bg-brand-500 hover:bg-brand-400 text-night-900 font-semibold px-5 py-3 rounded-xl shadow-glow">
+              Start Free Calculation
+            </button>
+            <a href="#dashboard" class="px-5 py-3 rounded-xl border border-white/20 hover:border-white/40 hover:bg-white/5">
+              View Dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="relative py-20">
+    <div class="relative max-w-5xl mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="font-display text-3xl md:text-4xl font-bold">Frequently Asked Questions</h2>
+        <p class="mt-3 text-white/70">Get answers to common questions about calculating and completing missed prayers and fasts according to Islamic guidance.</p>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Q1 -->
+        <details class="group rounded-2xl border border-white/10 bg-white/5 p-5">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="font-semibold">How accurate are the prayer and fast calculations?</span>
+            <span class="ml-4 w-8 h-8 grid place-items-center rounded-lg bg-white/5 border border-white/10 group-open:rotate-45 transition">+</span>
+          </summary>
+          <p class="mt-3 text-white/80">
+            Our calculations are based on established Islamic jurisprudence and consider the age of responsibility (Bulugh), valid exemption periods for women during menstruation, and other circumstances recognized in Islamic law. The system accounts for the standard five daily prayers (Fajr, Dhuhr, Asr, Maghrib, Isha) and Ramadan fasting obligations from the time you became responsible for these acts of worship.
+          </p>
+        </details>
+
+        <!-- Q2 -->
+        <details class="group rounded-2xl border border-white/10 bg-white/5 p-5">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="font-semibold">Is my personal information kept private and secure?</span>
+            <span class="ml-4 w-8 h-8 grid place-items-center rounded-lg bg-white/5 border border-white/10 group-open:rotate-45 transition">+</span>
+          </summary>
+          <p class="mt-3 text-white/80">
+            Absolutely. We take your privacy very seriously. All personal information including your date of birth, gender, and menstruation cycle data is encrypted and stored securely. We never share your personal information with third parties, and you have full control over your data. You can delete your account and all associated data at any time.
+          </p>
+        </details>
+
+        <!-- Q3 -->
+        <details class="group rounded-2xl border border-white/10 bg-white/5 p-5">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="font-semibold">Why do I need to provide menstruation cycle information?</span>
+            <span class="ml-4 w-8 h-8 grid place-items-center rounded-lg bg-white/5 border border-white/10 group-open:rotate-45 transition">+</span>
+          </summary>
+          <p class="mt-3 text-white/80">
+            According to Islamic jurisprudence, women are exempt from performing prayers and fasting during menstruation. To provide accurate calculations, we need to subtract these exemption periods from the total count. This information is used solely for calculation purposes and is kept completely private. This ensures that your final count reflects only the prayers and fasts that you were actually required to perform.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-10">
+      <div class="grid md:grid-cols-3 gap-8 items-center">
+        <div>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-brand-500/20 border border-brand-400/30 grid place-items-center">
+              <span class="text-lg">🕌</span>
+            </div>
+            <span class="font-semibold">NamazTrack</span>
+          </div>
+          <p class="text-white/60 text-sm mt-2">© <span id="year"></span> NamazTrack. All rights reserved.</p>
+        </div>
+        <div class="flex md:justify-center gap-4">
+          <a href="https://twitter.com" target="_blank" class="px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5">Twitter</a>
+          <a href="https://instagram.com" target="_blank" class="px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5">Instagram</a>
+          <a href="https://youtube.com" target="_blank" class="px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5">YouTube</a>
+          <a href="https://linkedin.com" target="_blank" class="px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5">LinkedIn</a>
+        </div>
+        <div class="md:text-right text-white/70 text-sm">
+          <a href="#" class="hover:text-white">Privacy</a>
+          <span class="mx-2">•</span>
+          <a href="#" class="hover:text-white">Terms</a>
+          <span class="mx-2">•</span>
+          <a href="#" class="hover:text-white">Contact</a>
+        </div>
+      </div>
+    </div>
   </footer>
-</body>
+
+  <!-- Calculator Modal (Demo) -->
+  <div id="calcModal" class="fixed inset-0 z-[999] hidden">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative mx-auto my-10 max-w-2xl bg-night-800/90 border border-white/10 backdrop-blur-xl rounded-3xl overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <h3 class="font-semibold">Start Free Calculation (Demo)</h3>
+        <button id="closeCalc" class="px-3 py-1 rounded-lg border border-white/15 hover:bg-white/5">Close</button>
+      </div>
+
+      <div class="p-6 grid md:grid-cols-2 gap-6">
+        <!-- Inputs -->
+        <div>
+          <label class="block text-sm text-white/70">Date of Birth</label>
+          <input id="dob" type="date" class="mt-1 w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-400" />
+          <div class="mt-4">
+            <label class="block text-sm text-white/70">Gender</label>
+            <select id="gender" class="mt-1 w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-400">
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+            </select>
+          </div>
+          <div id="menstruationGroup" class="mt-4">
+            <label class="block text-sm text-white/70">Average menstruation days per cycle</label>
+            <input id="mDays" type="number" min="0" max="15" value="7" class="mt-1 w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-400" />
+          </div>
+          <div class="mt-4">
+            <label class="block text-sm text-white/70">Age of responsibility (years)</label>
+            <input id="ageResp" type="number" min="7" max="18" value="9" class="mt-1 w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-400" />
+            <p class="text-xs text-white/60 mt-1">Tip: Commonly 9 (female) or 12 (male). You can adjust.</p>
+          </div>
+          <button id="calcBtn" class="mt-5 w-full bg-brand-500 hover:bg-brand-400 text-night-900 font-semibold px-4 py-2 rounded-lg shadow-glow">Calculate Now</button>
+          <p class="text-xs text-white/60 mt-3">This demo provides rough estimates for personal planning only.</p>
+          <p id="calcError" class="hidden mt-2 text-sm text-rose-300"></p>
+        </div>
+
+        <!-- Results -->
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+          <h4 class="font-semibold">Estimated Results</h4>
+          <div class="mt-3 grid grid-cols-2 gap-3">
+            <div class="rounded-xl p-3 bg-brand-500/10 border border-brand-400/20">
+              <p class="text-xs text-white/70">Missed Prayers</p>
+              <p id="resPrayers" class="text-2xl font-bold mt-1">–</p>
+            </div>
+            <div class="rounded-xl p-3 bg-indigo-500/10 border border-indigo-400/20">
+              <p class="text-xs text-white/70">Missed Fasts</p>
+              <p id="resFasts" class="text-2xl font-bold mt-1">–</p>
+            </div>
+          </div>
+
+          <div class="mt-4 rounded-xl p-3 bg-white/5 border border-white/10">
+            <p class="text-sm font-medium">Breakdown by prayer type</p>
+            <div class="grid grid-cols-5 gap-2 mt-2 text-center text-xs">
+              <div><div class="font-semibold" id="bFajr">–</div><div class="text-white/60">Fajr</div></div>
+              <div><div class="font-semibold" id="bDhuhr">–</div><div class="text-white/60">Dhuhr</div></div>
+              <div><div class="font-semibold" id="bAsr">–</div><div class="text-white/60">Asr</div></div>
+              <div><div class="font-semibold" id="bMaghrib">–</div><div class="text-white/60">Maghrib</div></div>
+              <div><div class="font-semibold" id="bIsha">–</div><div class="text-white/60">Isha</div></div>
+            </div>
+          </div>
+
+          <div class="mt-4 grid grid-cols-2 gap-3">
+            <button id="copySummary" class="px-3 py-2 rounded-lg border border-white/15 hover:bg-white/5">Copy Summary</button>
+            <button id="addToCalendar" class="px-3 py-2 rounded-lg bg-pink-500/20 border border-pink-400/30 hover:bg-pink-500/30">Add to Calendar (demo)</button>
+          </div>
+          <p id="copyMsg" class="hidden mt-2 text-emerald-300 text-sm">Summary copied!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Stars generation
+    const starsEl = document.querySelector('.stars');
+    for (let i = 0; i < 40; i++) {
+      const s = document.createElement('i');
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.animationDelay = (Math.random() * 4) + 's';
+      s.style.opacity = 0.4 + Math.random() * 0.6;
+      starsEl.appendChild(s);
+    }
+
+    // Modal open/close
+    const calcModal = document.getElementById('calcModal');
+    const openButtons = [document.getElementById('openCalcTop'), document.getElementById('openCalcHero'), document.getElementById('openCalcCTA')];
+    const closeButton = document.getElementById('closeCalc');
+
+    openButtons.forEach(btn => btn && btn.addEventListener('click', () => {
+      calcModal.classList.remove('hidden');
+    }));
+    closeButton.addEventListener('click', () => calcModal.classList.add('hidden'));
+    calcModal.addEventListener('click', (e) => {
+      if (e.target === calcModal.firstElementChild) calcModal.classList.add('hidden');
+    });
+
+    // Calculator logic (demo)
+    const dob = document.getElementById('dob');
+    const gender = document.getElementById('gender');
+    const mDays = document.getElementById('mDays');
+    const ageResp = document.getElementById('ageResp');
+    const menstruationGroup = document.getElementById('menstruationGroup');
+    const calcBtn = document.getElementById('calcBtn');
+    const calcError = document.getElementById('calcError');
+
+    const resPrayers = document.getElementById('resPrayers');
+    const resFasts = document.getElementById('resFasts');
+    const bFajr = document.getElementById('bFajr');
+    const bDhuhr = document.getElementById('bDhuhr');
+    const bAsr = document.getElementById('bAsr');
+    const bMaghrib = document.getElementById('bMaghrib');
+    const bIsha = document.getElementById('bIsha');
+
+    function updateAgeRespDefault() {
+      ageResp.value = gender.value === 'female' ? 9 : 12;
+      menstruationGroup.style.display = gender.value === 'female' ? '' : 'none';
+    }
+    updateAgeRespDefault();
+    gender.addEventListener('change', updateAgeRespDefault);
+
+    function daysBetween(d1, d2) {
+      const ms = 24 * 60 * 60 * 1000;
+      const a = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate());
+      const b = new Date(d2.getFullYear(), d2.getMonth(), d2.getDate());
+      return Math.max(0, Math.floor((b - a) / ms));
+    }
+
+    calcBtn.addEventListener('click', () => {
+      calcError.classList.add('hidden');
+      if (!dob.value) {
+        calcError.textContent = 'Please enter your date of birth.';
+        calcError.classList.remove('hidden');
+        return;
+      }
+      const dobDate = new Date(dob.value);
+      if (isNaN(dobDate)) {
+        calcError.textContent = 'Invalid date of birth.';
+        calcError.classList.remove('hidden');
+        return;
+      }
+      const now = new Date();
+      const responsibility = new Date(dobDate);
+      responsibility.setFullYear(responsibility.getFullYear() + Number(ageResp.value || 0));
+      const totalDays = daysBetween(responsibility, now);
+
+      let exemptDays = 0;
+      if (gender.value === 'female') {
+        const cycles = totalDays / 28; // approximate cycles
+        exemptDays = Math.max(0, Math.floor(cycles * Math.min(15, Number(mDays.value || 0))));
+      }
+
+      const effectiveDays = Math.max(0, totalDays - exemptDays);
+      const missedPrayers = effectiveDays * 5;
+
+      // Approximate missed fasts: 30 per year minus average menstruation per year (if female)
+      let yearsSince = (now - responsibility) / (365.25 * 24 * 60 * 60 * 1000);
+      yearsSince = Math.max(0, yearsSince);
+      let fastsPerYear = 30;
+      if (gender.value === 'female') {
+        fastsPerYear = Math.max(0, 30 - Math.min(15, Number(mDays.value || 0)));
+      }
+      const missedFasts = Math.floor(yearsSince * fastsPerYear);
+
+      resPrayers.textContent = missedPrayers.toLocaleString();
+      resFasts.textContent = missedFasts.toLocaleString();
+
+      // Equal distribution per prayer
+      bFajr.textContent = effectiveDays.toLocaleString();
+      bDhuhr.textContent = effectiveDays.toLocaleString();
+      bAsr.textContent = effectiveDays.toLocaleString();
+      bMaghrib.textContent = effectiveDays.toLocaleString();
+      bIsha.textContent = effectiveDays.toLocaleString();
+    });
+
+    // Copy summary
+    const copySummary = document.getElementById('copySummary');
+    const copyMsg = document.getElementById('copyMsg');
+    copySummary.addEventListener('click', async () => {
+      const summary = `NamazTrack Demo Summary:
+- DOB: ${dob.value || 'N/A'}
+- Gender: ${gender.value}
+- Age of responsibility: ${ageResp.value}
+- Avg menstruation days: ${gender.value === 'female' ? (mDays.value || 0) : 'N/A'}
+- Estimated Missed Prayers: ${resPrayers.textContent}
+- Estimated Missed Fasts: ${resFasts.textContent}`;
+      try {
+        await navigator.clipboard.writeText(summary);
+        copyMsg.classList.remove('hidden');
+        setTimeout(() => copyMsg.classList.add('hidden'), 2000);
+      } catch {
+        // Fallback: create a temporary textarea
+        const ta = document.createElement('textarea');
+        ta.value = summary;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        copyMsg.classList.remove('hidden');
+        setTimeout(() => copyMsg.classList.add('hidden'), 2000);
+      }
+    });
+
+    // "Add to Calendar" simple cue
+    document.getElementById('addToCalendar').addEventListener('click', () => {
+      // Smooth scroll to calendar section
+      document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+      calcModal.classList.add('hidden');
+    });
+
+    // Calendar
+    const monthLabel = document.getElementById('monthLabel');
+    const calendarGrid = document.getElementById('calendarGrid');
+    const prevMonth = document.getElementById('prevMonth');
+    const nextMonth = document.getElementById('nextMonth');
+    const resetCalendar = document.getElementById('resetCalendar');
+    const statPrayers = document.getElementById('statPrayers');
+    const statFasts = document.getElementById('statFasts');
+    const barPrayers = document.getElementById('barPrayers');
+    const barFasts = document.getElementById('barFasts');
+
+    let current = new Date();
+    current.setDate(1);
+    let marks = {}; // { 'YYYY-MM-DD': { p: boolean, f: boolean } }
+
+    function formatKey(y, m, d) {
+      return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    }
+
+    function renderCalendar() {
+      calendarGrid.innerHTML = '';
+      const y = current.getFullYear();
+      const m = current.getMonth();
+      const firstDay = new Date(y, m, 1).getDay();
+      const daysInMonth = new Date(y, m+1, 0).getDate();
+      monthLabel.textContent = new Date(y, m, 1).toLocaleString(undefined, { month: 'long', year: 'numeric' });
+
+      // blanks
+      for (let i = 0; i < firstDay; i++) {
+        const blank = document.createElement('div');
+        blank.className = 'h-20 rounded-xl border border-white/5 bg-white/[.03]';
+        calendarGrid.appendChild(blank);
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const key = formatKey(y, m, d);
+        if (!marks[key]) marks[key] = { p: false, f: false };
+        const cell = document.createElement('div');
+        cell.className = 'group h-20 rounded-xl border border-white/10 bg-white/5 p-2 flex flex-col justify-between hover:bg-white/10 transition';
+
+        const top = document.createElement('div');
+        top.className = 'flex items-center justify-between text-xs';
+        const dayLabel = document.createElement('span');
+        dayLabel.textContent = d;
+        dayLabel.className = 'text-white/80 font-medium';
+        const badges = document.createElement('div');
+        badges.className = 'flex items-center gap-1';
+        const pBadge = document.createElement('span');
+        const fBadge = document.createElement('span');
+
+        function updateBadges() {
+          pBadge.textContent = marks[key].p ? '✔︎' : '—';
+          fBadge.textContent = marks[key].f ? '🌙' : '—';
+          pBadge.className = `px-2 py-0.5 rounded-full text-[10px] border ${marks[key].p ? 'bg-brand-400/20 border-brand-400/40 text-brand-200' : 'bg-white/5 border-white/10 text-white/40'}`;
+          fBadge.className = `px-2 py-0.5 rounded-full text-[10px] border ${marks[key].f ? 'bg-indigo-400/20 border-indigo-400/40 text-indigo-200' : 'bg-white/5 border-white/10 text-white/40'}`;
+        }
+        updateBadges();
+
+        badges.appendChild(pBadge);
+        badges.appendChild(fBadge);
+        top.appendChild(dayLabel);
+        top.appendChild(badges);
+
+        const buttons = document.createElement('div');
+        buttons.className = 'grid grid-cols-2 gap-2';
+        const pBtn = document.createElement('button');
+        pBtn.textContent = 'Prayers';
+        pBtn.className = 'text-xs px-2 py-1 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10';
+        const fBtn = document.createElement('button');
+        fBtn.textContent = 'Fast';
+        fBtn.className = 'text-xs px-2 py-1 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10';
+
+        pBtn.addEventListener('click', () => {
+          marks[key].p = !marks[key].p;
+          updateBadges();
+          updateStats();
+        });
+        fBtn.addEventListener('click', () => {
+          marks[key].f = !marks[key].f;
+          updateBadges();
+          updateStats();
+        });
+
+        cell.appendChild(top);
+        cell.appendChild(buttons);
+        calendarGrid.appendChild(cell);
+      }
+
+      updateStats();
+    }
+
+    function updateStats() {
+      const y = current.getFullYear();
+      const m = current.getMonth();
+      const daysInMonth = new Date(y, m + 1, 0).getDate();
+      let p = 0, f = 0;
+      for (let d = 1; d <= daysInMonth; d++) {
+        const key = formatKey(y, m, d);
+        if (marks[key]?.p) p++;
+        if (marks[key]?.f) f++;
+      }
+      statPrayers.textContent = p;
+      statFasts.textContent = f;
+      barPrayers.style.width = Math.round((p / daysInMonth) * 100) + '%';
+      barFasts.style.width = Math.round((f / daysInMonth) * 100) + '%';
+    }
+
+    prevMonth.addEventListener('click', () => {
+      current.setMonth(current.getMonth() - 1);
+      renderCalendar();
+    });
+    nextMonth.addEventListener('click', () => {
+      current.setMonth(current.getMonth() + 1);
+      renderCalendar();
+    });
+    resetCalendar.addEventListener('click', () => {
+      const y = current.getFullYear();
+      const m = current.getMonth();
+      const daysInMonth = new Date(y, m + 1, 0).getDate();
+      for (let d = 1; d <= daysInMonth; d++) {
+        const key = formatKey(y, m, d);
+        marks[key] = { p: false, f: false };
+      }
+      renderCalendar();
+    });
+
+    renderCalendar();
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b231d0d5332124',t:'MTc1NDUyMTY5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
