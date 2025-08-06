@@ -1,0 +1,99 @@
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #f6f9fc;
+  color: #222;
+}
+a {
+  text-decoration: none;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.navbar {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+}
+.navbar .logo {
+  font-weight: 700;
+  font-size: 20px;
+}
+.navbar .nav-links a {
+  margin: 0 10px;
+  color: #333;
+}
+.navbar .cta-button {
+  background: #1e56d2;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.hero {
+  background: url('../assets/hero-bg.jpg') center/cover no-repeat;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.hero .overlay {
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  padding: 40px;
+  text-align: center;
+  max-width: 700px;
+}
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+.hero .highlight {
+  color: #f39200;
+}
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+.hero-buttons a {
+  margin: 0 10px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.primary-btn {
+  background: #1e56d2;
+  color: white;
+}
+.secondary-btn {
+  background: white;
+  color: #333;
+}
+.hero-features {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+.feature-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.feature-box img {
+  width: 40px;
+  margin-bottom: 8px;
+}
+.footer {
+  background: #0c1c3c;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}
